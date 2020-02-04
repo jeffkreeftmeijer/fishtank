@@ -37,7 +37,7 @@ defmodule FishtankWeb.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, path: "../../../..", override: true},
+      {:phoenix, github: "phoenixframework/phoenix", override: true},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:telemetry_metrics, "~> 0.4"},
