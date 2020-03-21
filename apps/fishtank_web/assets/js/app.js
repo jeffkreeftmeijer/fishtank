@@ -6,7 +6,7 @@ import {Fishtank} from "./fishtank"
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
-let fishtank = new Fishtank;
+let fishtank = new Fishtank(document.getElementById('fishtank'));
 
 let channel = socket.channel("fishtank", {})
 channel.join()
