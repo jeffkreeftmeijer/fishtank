@@ -17,4 +17,6 @@ channel.on("update", payload => {
   fishtank.update(payload)
 })
 
+setInterval(() => { fishtank.render() }, 16);
+
 export default socket
