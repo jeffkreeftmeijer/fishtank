@@ -8,6 +8,10 @@ blocks:
   - name: mix test
     task:
       jobs:
+        - name: npm audit
+          commands:
+            - checkout
+            - npm audit --prefix=apps/fishtank_web/assets
         - name: mix test
           commands:
             - sem-version erlang 22
