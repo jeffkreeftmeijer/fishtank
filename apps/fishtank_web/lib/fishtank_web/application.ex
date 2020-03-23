@@ -10,7 +10,8 @@ defmodule FishtankWeb.Application do
       # Start the Telemetry supervisor
       FishtankWeb.Telemetry,
       # Start the Endpoint (http/https)
-      FishtankWeb.Endpoint
+      FishtankWeb.Endpoint,
+      {FishtankWeb.Broadcaster, [name: FishtankWeb.Broadcaster, endpoint: FishtankWeb.Endpoint]}
       # Start a worker by calling: FishtankWeb.Worker.start_link(arg)
       # {FishtankWeb.Worker, arg}
     ]
