@@ -34,7 +34,7 @@ defmodule FishtankWeb.BroadcasterTest do
       :timer.sleep(20)
       messages = Receiver.messages()
       assert length(messages) == n
-      assert [{"fishtank", "update", %{entities: [%{x: _, y: _} | _]}} | _] = messages
+      assert [{"fishtank", "update", %{entities: [%{location: _} | _]}} | _] = messages
     end)
   end
 end

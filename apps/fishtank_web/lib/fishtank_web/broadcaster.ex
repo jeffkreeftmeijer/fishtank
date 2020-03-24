@@ -15,9 +15,7 @@ defmodule FishtankWeb.Broadcaster do
       "fishtank",
       "update",
       %{
-        entities: [
-          %{x: :rand.uniform(100) - 50, y: :rand.uniform(100) - 50}
-        ]
+        entities: [Fishtank.Entity.state()]
       }
     )
 

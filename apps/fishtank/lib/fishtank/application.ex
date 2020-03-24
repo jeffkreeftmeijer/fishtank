@@ -8,9 +8,8 @@ defmodule Fishtank.Application do
   def start(_type, _args) do
     children = [
       # Start the PubSub system
-      {Phoenix.PubSub, name: Fishtank.PubSub}
-      # Start a worker by calling: Fishtank.Worker.start_link(arg)
-      # {Fishtank.Worker, arg}
+      {Phoenix.PubSub, name: Fishtank.PubSub},
+      Fishtank.Entity
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: Fishtank.Supervisor)
