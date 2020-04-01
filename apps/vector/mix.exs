@@ -19,6 +19,7 @@ defmodule Vector.MixProject do
 
   defp deps do
     [
+      {:benchee, "~> 1.0", only: :dev}
     ]
   end
 end
