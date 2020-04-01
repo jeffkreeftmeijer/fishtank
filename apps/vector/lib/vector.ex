@@ -15,13 +15,13 @@ defmodule Vector do
 
   """
   @spec add(t, t) :: t
-  def add(one, two) do
-    one
-    |> Enum.with_index()
-    |> Enum.map(fn {value, index} ->
-      value + Enum.at(two, index)
-    end)
+  def add(one, two), do: add(one, two, [])
+
+  def add([one | one_tail], [two | two_tail], acc) do
+    add(one_tail, two_tail, [one + two | acc])
   end
+
+  def add([], [], acc), do: Enum.reverse(acc)
 
   @doc ~S"""
   Subtracts two vectors.
@@ -37,11 +37,11 @@ defmodule Vector do
 
   """
   @spec subtract(t, t) :: t
-  def subtract(one, two) do
-    one
-    |> Enum.with_index()
-    |> Enum.map(fn {value, index} ->
-      value - Enum.at(two, index)
-    end)
+  def subtract(one, two), do: subtract(one, two, [])
+
+  def subtract([one | one_tail], [two | two_tail], acc) do
+    subtract(one_tail, two_tail, [one - two | acc])
   end
+
+  def subtract([], [], acc), do: Enum.reverse(acc)
 end
