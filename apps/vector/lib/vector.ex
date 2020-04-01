@@ -16,14 +16,8 @@ defmodule Vector do
   """
   @spec add(t, t) :: t
   def add(one, two) when length(one) == length(two) do
-    add(one, two, [])
+    zip(one, two, [], &Kernel.+/2)
   end
-
-  def add([one | one_tail], [two | two_tail], acc) do
-    add(one_tail, two_tail, [one + two | acc])
-  end
-
-  def add([], [], acc), do: Enum.reverse(acc)
 
   @doc ~S"""
   Subtracts two vectors.
@@ -40,12 +34,12 @@ defmodule Vector do
   """
   @spec subtract(t, t) :: t
   def subtract(one, two) when length(one) == length(two) do
-    subtract(one, two, [])
+    zip(one, two, [], &Kernel.-/2)
   end
 
-  def subtract([one | one_tail], [two | two_tail], acc) do
-    subtract(one_tail, two_tail, [one - two | acc])
+  defp zip([one | one_tail], [two | two_tail], acc, fun) do
+    zip(one_tail, two_tail, [fun.(one, two) | acc], fun)
   end
 
-  def subtract([], [], acc), do: Enum.reverse(acc)
+  defp zip([], [], acc, _fun), do: Enum.reverse(acc)
 end
