@@ -93,6 +93,25 @@ defmodule Vector do
     |> :math.sqrt()
   end
 
+  @doc ~S"""
+  Sets the vector's magnitude.
+
+  ## Example
+
+      iex> Vector.set_magnitude([3.0], 6.0)
+      [6.0]
+      iex> Vector.set_magnitude([3.0, 4.0], 10.0)
+      [6.0, 8.0]
+      iex> Vector.set_magnitude([3.0, 4.0, 12.0], 26)
+      [6.0, 8.0, 24.0]
+
+  """
+  @spec set_magnitude(t, float) :: t
+  def set_magnitude(vector, new_magnitude) do
+    magnitude = magnitude(vector)
+    Enum.map(vector, &(&1 / magnitude * new_magnitude))
+  end
+
   defp zip([one | one_tail], [two | two_tail], acc, fun) do
     zip(one_tail, two_tail, [fun.(one, two) | acc], fun)
   end
