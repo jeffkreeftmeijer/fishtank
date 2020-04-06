@@ -73,6 +73,26 @@ defmodule Vector do
     Enum.map(vector, &(&1 / divider))
   end
 
+  @doc ~S"""
+  Returns a vector's magnitude.
+
+  ## Example
+
+      iex> Vector.magnitude([3.0])
+      3.0
+      iex> Vector.magnitude([3.0, 4.0])
+      5.0
+      iex> Vector.magnitude([3.0, 4.0, 12.0])
+      13.0
+
+  """
+  @spec magnitude(t) :: float
+  def magnitude(vector) do
+    vector
+    |> Enum.reduce(0, &(&1 * &1 + &2))
+    |> :math.sqrt()
+  end
+
   defp zip([one | one_tail], [two | two_tail], acc, fun) do
     zip(one_tail, two_tail, [fun.(one, two) | acc], fun)
   end
