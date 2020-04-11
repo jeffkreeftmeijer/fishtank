@@ -22,13 +22,17 @@ defmodule Fishtank.Entity do
     {:reply, state, state}
   end
 
-  def handle_info(:tick, _state) do
+  def handle_info(:tick, state) do
     schedule()
 
-    {:noreply,
-     %__MODULE__{
-       location: [:rand.uniform(@width) - @width / 2, :rand.uniform(@height) - @height / 2]
-     }}
+    {:noreply, update_location(state)}
+  end
+
+  def update_location(entity) do
+    %{
+      entity
+      | location: [:rand.uniform(@width) - @width / 2, :rand.uniform(@height) - @height / 2]
+    }
   end
 
   defp schedule() do

@@ -23,4 +23,11 @@ defmodule Fishtank.EntityTest do
       assert %Entity{} = Entity.state()
     end
   end
+
+  describe "update_location/1" do
+    test "updates the entity's location" do
+      %Entity{location: updated_location} = Entity.update_location(%Entity{})
+      refute updated_location == [0.0, 0.0]
+    end
+  end
 end
