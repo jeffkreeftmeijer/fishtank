@@ -37,6 +37,7 @@ defmodule Fishtank.MixProject do
   defp deps do
     [
       {:phoenix_pubsub, "~> 2.0"},
+      {:jason, "~> 1.0"},
       {:vector, in_umbrella: true}
     ]
   end
