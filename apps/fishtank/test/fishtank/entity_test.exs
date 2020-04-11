@@ -34,11 +34,4 @@ defmodule Fishtank.EntityTest do
       refute updated_velocity == [0.0, 0.0]
     end
   end
-
-  describe "update_location/1" do
-    test "updates the entity's location based on the current velocity" do
-      %Entity{location: [2.0, 3.0]} =
-        Entity.update_location(%Entity{location: [1.0, 2.0], velocity: [1.0, 1.0]})
-    end
-  end
 end
