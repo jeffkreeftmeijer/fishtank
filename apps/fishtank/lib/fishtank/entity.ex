@@ -1,5 +1,5 @@
 defmodule Fishtank.Entity do
-  defstruct location: [0.0, 0.0]
+  defstruct location: [0.0, 0.0], velocity: [0.0, 0.0]
   use GenServer
 
   @width 960
