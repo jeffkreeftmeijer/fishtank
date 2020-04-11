@@ -1,5 +1,7 @@
 defmodule Fishtank.Entity do
+  @derive {Jason.Encoder, only: [:location]}
   defstruct location: [0.0, 0.0], velocity: [0.0, 0.0]
+
   use GenServer
 
   def start_link(_opts) do
