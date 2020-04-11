@@ -2,9 +2,6 @@ defmodule Fishtank.Entity do
   defstruct location: [0.0, 0.0], velocity: [0.0, 0.0]
   use GenServer
 
-  @width 960
-  @height 540
-
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, %__MODULE__{}, name: __MODULE__)
   end
@@ -37,11 +34,8 @@ defmodule Fishtank.Entity do
     %{entity | velocity: [:rand.uniform(300) / 100 - 2, :rand.uniform(300) / 100 - 2]}
   end
 
-  def update_location(entity) do
-    %{
-      entity
-      | location: [:rand.uniform(@width) - @width / 2, :rand.uniform(@height) - @height / 2]
-    }
+  def update_location(%__MODULE__{location: location, velocity: velocity} = entity) do
+    %{entity | location: Vector.add(location, velocity)}
   end
 
   defp schedule() do
