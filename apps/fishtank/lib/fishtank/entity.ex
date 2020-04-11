@@ -1,11 +1,12 @@
 defmodule Fishtank.Entity do
+  defstruct location: [0.0, 0.0]
   use GenServer
 
   @width 960
   @height 540
 
   def start_link(_opts) do
-    GenServer.start_link(__MODULE__, %{location: [0.0, 0.0]}, name: __MODULE__)
+    GenServer.start_link(__MODULE__, %__MODULE__{}, name: __MODULE__)
   end
 
   def init(state) do
@@ -25,7 +26,9 @@ defmodule Fishtank.Entity do
     schedule()
 
     {:noreply,
-     %{location: [:rand.uniform(@width) - @width / 2, :rand.uniform(@height) - @height / 2]}}
+     %__MODULE__{
+       location: [:rand.uniform(@width) - @width / 2, :rand.uniform(@height) - @height / 2]
+     }}
   end
 
   defp schedule() do

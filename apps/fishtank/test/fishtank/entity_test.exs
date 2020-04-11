@@ -20,7 +20,7 @@ defmodule Fishtank.EntityTest do
 
   describe "state/0" do
     test "returns the entity's state" do
-      assert %{} = Entity.state()
+      assert %Entity{} = Entity.state()
     end
   end
 end
