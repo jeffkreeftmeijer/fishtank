@@ -25,7 +25,16 @@ defmodule Fishtank.Entity do
   def handle_info(:tick, state) do
     schedule()
 
-    {:noreply, update_location(state)}
+    new_state =
+      state
+      |> update_velocity()
+      |> update_location()
+
+    {:noreply, new_state}
+  end
+
+  def update_velocity(entity) do
+    %{entity | velocity: [:rand.uniform(300) / 100 - 2, :rand.uniform(300) / 100 - 2]}
   end
 
   def update_location(entity) do
