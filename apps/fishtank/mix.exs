@@ -38,7 +38,8 @@ defmodule Fishtank.MixProject do
     [
       {:phoenix_pubsub, "~> 2.0"},
       {:jason, "~> 1.0"},
-      {:vector, in_umbrella: true}
+      {:vector, in_umbrella: true},
+      {:stream_data, "~> 0.1", only: :test}
     ]
   end
 
