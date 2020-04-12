@@ -61,11 +61,4 @@ defmodule Fishtank.EntityTest do
       refute updated_acceleration == 0.0
     end
   end
-
-  describe "update_velocity/1" do
-    test "updates the entity's velocity" do
-      %Entity{velocity: updated_velocity} = Entity.update_velocity(%Entity{})
-      refute updated_velocity == [0.0, 0.0]
-    end
-  end
 end

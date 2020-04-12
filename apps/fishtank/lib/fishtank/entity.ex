@@ -6,7 +6,7 @@ defmodule Fishtank.Entity do
 
   use GenServer
 
-  alias Fishtank.Entity.Location
+  alias Fishtank.Entity.{Location, Velocity}
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, %__MODULE__{}, Keyword.merge([name: __MODULE__], opts))
@@ -31,7 +31,7 @@ defmodule Fishtank.Entity do
     new_state =
       state
       |> update_acceleration()
-      |> update_velocity()
+      |> Velocity.update()
       |> Location.update()
 
     {:noreply, new_state}
@@ -39,10 +39,6 @@ defmodule Fishtank.Entity do
 
   def update_acceleration(entity) do
     %{entity | acceleration: 0.1}
-  end
-
-  def update_velocity(entity) do
-    %{entity | velocity: [:rand.uniform(300) / 100 - 2, :rand.uniform(300) / 100 - 2]}
   end
 
   defp schedule() do
