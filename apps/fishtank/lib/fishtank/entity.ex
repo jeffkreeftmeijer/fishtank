@@ -2,6 +2,8 @@ defmodule Fishtank.Entity do
   @derive {Jason.Encoder, only: [:location]}
   defstruct location: [0.0, 0.0], velocity: [0.0, 0.0]
 
+  @type t :: %Fishtank.Entity{location: Vector.t(), velocity: Vector.t()}
+
   use GenServer
 
   alias Fishtank.Entity.Location

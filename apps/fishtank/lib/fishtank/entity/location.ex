@@ -12,6 +12,7 @@ defmodule Fishtank.Entity.Location do
       %Fishtank.Entity{location: [4.0, 6.0], velocity: [3.0, 4.0]}
 
   """
+  @spec update(Entity.t()) :: Entity.t()
   def update(%Entity{location: location, velocity: velocity} = entity) do
     %{entity | location: Vector.add(location, velocity)}
   end
