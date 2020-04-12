@@ -3,10 +3,11 @@ defmodule Fishtank.Entity.DragTest do
   use ExUnitProperties
   doctest Fishtank.Entity.Drag
   alias Fishtank.{Entity, Entity.Drag}
+  import Fishtank.Entity.Generator
 
   property "apply/1 decreases an Entity's velocity" do
-    check all([x, y] = velocity <- non_zero_vector()) do
-      %Entity{velocity: [new_x, new_y]} = Drag.apply(%Entity{velocity: velocity})
+    check all(%Entity{velocity: [x, y]} = entity <- entity(&non_zero_vector/0)) do
+      %Entity{velocity: [new_x, new_y]} = Drag.apply(entity)
 
       if x > 0 do
         assert new_x < x
@@ -20,12 +21,6 @@ defmodule Fishtank.Entity.DragTest do
         assert new_y > y
       end
     end
-  end
-
-  defp vector() do
-    bind({float(), float()}, fn {x, y} ->
-      constant([x, y])
-    end)
   end
 
   defp non_zero_vector() do

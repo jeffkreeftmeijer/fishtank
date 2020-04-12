@@ -3,6 +3,7 @@ defmodule Fishtank.Entity.BoundariesTest do
   use ExUnitProperties
   doctest Fishtank.Entity.Boundaries
   alias Fishtank.{Entity, Entity.Boundaries}
+  import Entity.Generator
 
   property "apply/1 keeps entities within the viewport's boundaries" do
     check all(entity <- entity()) do
@@ -11,18 +12,6 @@ defmodule Fishtank.Entity.BoundariesTest do
       assert x >= -480
       assert y <= 270
       assert y >= -270
-    end
-  end
-
-  defp entity() do
-    gen all(location <- vector(), velocity <- vector()) do
-      %Entity{location: location, velocity: velocity}
-    end
-  end
-
-  defp vector() do
-    gen all(x <- float(), y <- float()) do
-      [x, y]
     end
   end
 end
