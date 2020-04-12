@@ -28,6 +28,29 @@ defmodule Fishtank.EntityTest do
     end
   end
 
+  describe "state/1" do
+    test "returns the entity's state" do
+      assert %Entity{} = Entity.state(Entity)
+    end
+  end
+
+  describe ":tick" do
+    setup do
+      {:ok, pid} = Entity.start_link(name: __MODULE__)
+      send(pid, :tick)
+
+      %{state: Entity.state(pid)}
+    end
+
+    test "updates the entity's velocity", %{state: %Entity{velocity: velocity}} do
+      refute velocity == [0.0, 0.0]
+    end
+
+    test "updates the entity's location", %{state: %Entity{location: location}} do
+      refute location == [0.0, 0.0]
+    end
+  end
+
   describe "update_velocity/1" do
     test "updates the entity's velocity" do
       %Entity{velocity: updated_velocity} = Entity.update_velocity(%Entity{})

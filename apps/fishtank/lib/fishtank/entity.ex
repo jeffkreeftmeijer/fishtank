@@ -8,8 +8,8 @@ defmodule Fishtank.Entity do
 
   alias Fishtank.Entity.Location
 
-  def start_link(_opts) do
-    GenServer.start_link(__MODULE__, %__MODULE__{}, name: __MODULE__)
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, %__MODULE__{}, Keyword.merge([name: __MODULE__], opts))
   end
 
   def init(state) do
@@ -17,8 +17,8 @@ defmodule Fishtank.Entity do
     {:ok, state}
   end
 
-  def state() do
-    GenServer.call(__MODULE__, :state)
+  def state(pid \\ __MODULE__) do
+    GenServer.call(pid, :state)
   end
 
   def handle_call(:state, _from, state) do
