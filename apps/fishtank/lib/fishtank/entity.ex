@@ -1,6 +1,6 @@
 defmodule Fishtank.Entity do
   @derive {Jason.Encoder, only: [:location]}
-  defstruct location: [0.0, 0.0], velocity: [0.0, 0.0]
+  defstruct location: [0.0, 0.0], velocity: [0.0, 0.0], acceleration: 0.0
 
   @type t :: %Fishtank.Entity{location: Vector.t(), velocity: Vector.t()}
 
@@ -30,10 +30,15 @@ defmodule Fishtank.Entity do
 
     new_state =
       state
+      |> update_acceleration()
       |> update_velocity()
       |> Location.update()
 
     {:noreply, new_state}
+  end
+
+  def update_acceleration(entity) do
+    %{entity | acceleration: 0.1}
   end
 
   def update_velocity(entity) do

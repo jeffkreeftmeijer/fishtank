@@ -42,12 +42,23 @@ defmodule Fishtank.EntityTest do
       %{state: Entity.state(pid)}
     end
 
+    test "updates the entity's acceleration", %{state: %Entity{acceleration: acceleration}} do
+      refute acceleration == 0.0
+    end
+
     test "updates the entity's velocity", %{state: %Entity{velocity: velocity}} do
       refute velocity == [0.0, 0.0]
     end
 
     test "updates the entity's location", %{state: %Entity{location: location}} do
       refute location == [0.0, 0.0]
+    end
+  end
+
+  describe "update_acceleration/1" do
+    test "updates the entity's acceleration" do
+      %Entity{acceleration: updated_acceleration} = Entity.update_acceleration(%Entity{})
+      refute updated_acceleration == 0.0
     end
   end
 
