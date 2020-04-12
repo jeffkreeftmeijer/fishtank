@@ -6,7 +6,7 @@ defmodule Fishtank.Entity do
 
   use GenServer
 
-  alias Fishtank.Entity.{Location, Velocity, Drag}
+  alias Fishtank.Entity.{Location, Velocity, Drag, Boundaries}
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, %__MODULE__{}, Keyword.merge([name: __MODULE__], opts))
@@ -34,6 +34,7 @@ defmodule Fishtank.Entity do
       |> update_acceleration()
       |> Velocity.update()
       |> Location.update()
+      |> Boundaries.apply()
 
     {:noreply, new_state}
   end
