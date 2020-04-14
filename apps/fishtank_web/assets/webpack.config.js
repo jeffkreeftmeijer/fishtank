@@ -25,6 +25,13 @@ module.exports = (env, options) => ({
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader'
+        }
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -44,6 +51,9 @@ module.exports = (env, options) => ({
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: [".ts", ".js"]
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '../css/app.css' }),
