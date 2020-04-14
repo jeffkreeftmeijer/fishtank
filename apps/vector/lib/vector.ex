@@ -112,6 +112,20 @@ defmodule Vector do
     Enum.map(vector, &(&1 / magnitude * new_magnitude))
   end
 
+  @doc ~S"""
+  Creates a 2D vector from an angle and an optional magnitude.
+
+  ## Example
+
+      iex> Vector.from_angle(:math.pi / 4)
+      [0.7071067811865476, 0.7071067811865475]
+
+  """
+  @spec from_angle(float) :: t
+  def from_angle(angle) do
+    [:math.cos(angle), :math.sin(angle)]
+  end
+
   defp zip([one | one_tail], [two | two_tail], acc, fun) do
     zip(one_tail, two_tail, [fun.(one, two) | acc], fun)
   end
