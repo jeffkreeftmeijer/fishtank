@@ -119,11 +119,18 @@ defmodule Vector do
 
       iex> Vector.from_angle(:math.pi / 4)
       [0.7071067811865476, 0.7071067811865475]
+      iex> Vector.from_angle(:math.pi / 4, 2.0)
+      [1.4142135623730951, 1.414213562373095]
 
   """
   @spec from_angle(float) :: t
   def from_angle(angle) do
     [:math.cos(angle), :math.sin(angle)]
+  end
+
+  @spec from_angle(float, float) :: t
+  def from_angle(angle, magnitude) do
+    [:math.cos(angle) * magnitude, :math.sin(angle) * magnitude]
   end
 
   defp zip([one | one_tail], [two | two_tail], acc, fun) do
