@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 export class Fishtank {
-  state: {entities: Array<{location: [number, number]}>}
+  state: {entities: Array<{location: [number, number], rotation: number}>}
   scene: THREE.Scene;
   camera: THREE.OrthographicCamera;
   renderer: THREE.WebGLRenderer;
@@ -42,6 +42,7 @@ export class Fishtank {
         fishtank.entities[index] = fishtank.entities[index] || new THREE.LineSegments(edges, material);
         fishtank.entities[index].position.x = entity.location[0];
         fishtank.entities[index].position.y = entity.location[1];
+        fishtank.entities[index].rotation.z = entity.rotation;
 
         fishtank.scene.add(fishtank.entities[index]);
       })

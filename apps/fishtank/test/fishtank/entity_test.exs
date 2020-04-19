@@ -19,7 +19,7 @@ defmodule Fishtank.EntityTest do
   end
 
   test "converts to JSON" do
-    assert Jason.encode(%Entity{}) == {:ok, "{\"location\":[0.0,0.0]}"}
+    assert Jason.encode(%Entity{}) == {:ok, "{\"location\":[0.0,0.0],\"rotation\":0.0}"}
   end
 
   describe "state/0" do

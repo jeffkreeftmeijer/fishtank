@@ -1,5 +1,5 @@
 defmodule Fishtank.Entity do
-  @derive {Jason.Encoder, only: [:location]}
+  @derive {Jason.Encoder, only: [:location, :rotation]}
   defstruct location: [0.0, 0.0],
             velocity: [0.0, 0.0],
             acceleration: 0.0,
