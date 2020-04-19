@@ -1,6 +1,9 @@
 defmodule Fishtank.Entity do
   @derive {Jason.Encoder, only: [:location]}
-  defstruct location: [0.0, 0.0], velocity: [0.0, 0.0], acceleration: 0.0
+  defstruct location: [0.0, 0.0],
+            velocity: [0.0, 0.0],
+            acceleration: 0.0,
+            rotation: 0.0
 
   @type t :: %Fishtank.Entity{location: Vector.t(), velocity: Vector.t()}
 
@@ -31,12 +34,17 @@ defmodule Fishtank.Entity do
     new_state =
       state
       |> Drag.apply()
+      |> update_rotation()
       |> update_acceleration()
       |> Velocity.update()
       |> Location.update()
       |> Boundaries.apply()
 
     {:noreply, new_state}
+  end
+
+  def update_rotation(%__MODULE__{rotation: rotation} = entity) do
+    %{entity | rotation: rotation + (:rand.uniform(100) - 50) / 1_000}
   end
 
   def update_acceleration(entity) do
