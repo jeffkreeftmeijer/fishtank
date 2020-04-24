@@ -11,15 +11,17 @@ defmodule FishtankWeb.Broadcaster do
   end
 
   def handle_info(:broadcast, [endpoint: endpoint] = state) do
-    endpoint.broadcast(
-      "fishtank",
-      "update",
-      %{
-        entities: [
-          %{x: :rand.uniform(100) - 50, y: :rand.uniform(100) - 50}
-        ]
-      }
-    )
+    if connections?() do
+      endpoint.broadcast(
+        "fishtank",
+        "update",
+        %{
+          entities: [
+            %{x: :rand.uniform(100) - 50, y: :rand.uniform(100) - 50}
+          ]
+        }
+      )
+    end
 
     schedule()
     {:noreply, state}
@@ -27,5 +29,12 @@ defmodule FishtankWeb.Broadcaster do
 
   defp schedule() do
     Process.send_after(self(), :broadcast, 16)
+  end
+
+  defp connections?() do
+    case FishtankWeb.Presence.list("fishtank") do
+      %{"fishtank" => _} -> true
+      %{} -> false
+    end
   end
 end

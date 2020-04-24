@@ -22,4 +22,8 @@ defmodule FishtankWeb.SpectatorChannelTest do
              handler: FishtankWeb.UserSocket
            } = socket
   end
+
+  test "registers the connection presence" do
+    assert %{"fishtank" => %{metas: [%{phx_ref: _}]}} = FishtankWeb.Presence.list("fishtank")
+  end
 end

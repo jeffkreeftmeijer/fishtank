@@ -20,14 +20,28 @@ defmodule FishtankWeb.BroadcasterTest do
   use ExUnit.Case
   alias FishtankWeb.{Broadcaster, Receiver}
 
+  setup do
+    Receiver.start_link()
+    :ok
+  end
+
   test "is started by the main supervisor" do
     assert Broadcaster
            |> Process.whereis()
            |> is_pid()
   end
 
+  test "does not broadcast updates when no clients are connected" do
+    Broadcaster.start_link(name: __MODULE__, endpoint: Receiver)
+
+    Enum.each(1..3, fn _ ->
+      :timer.sleep(20)
+      assert Receiver.messages() == []
+    end)
+  end
+
   test "broadcasts an update every 16 ms" do
-    Receiver.start_link()
+    Phoenix.Tracker.track(FishtankWeb.Presence, self(), "fishtank", "fishtank", %{})
     Broadcaster.start_link(name: __MODULE__, endpoint: Receiver)
 
     Enum.each(1..3, fn n ->
