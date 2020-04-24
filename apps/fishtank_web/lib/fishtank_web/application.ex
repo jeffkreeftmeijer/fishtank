@@ -11,7 +11,8 @@ defmodule FishtankWeb.Application do
       FishtankWeb.Telemetry,
       # Start the Endpoint (http/https)
       FishtankWeb.Endpoint,
-      {FishtankWeb.Broadcaster, [name: FishtankWeb.Broadcaster, endpoint: FishtankWeb.Endpoint]}
+      {FishtankWeb.Broadcaster, [name: FishtankWeb.Broadcaster, endpoint: FishtankWeb.Endpoint]},
+      FishtankWeb.Presence
       # Start a worker by calling: FishtankWeb.Worker.start_link(arg)
       # {FishtankWeb.Worker, arg}
     ]
